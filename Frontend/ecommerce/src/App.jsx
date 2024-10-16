@@ -1,17 +1,15 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
-import Cart from "./components/Cart";
-// import AddProduct from "./components/AddProduct";
+import AddProduct from "./components/AddProduct";
 import Product from "./components/Product";
-import OrderHistory from "./components/OrderHistory"; // Import the new OrderHistory component
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./Context/Context";
 import UpdateProduct from "./components/UpdateProduct";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -47,10 +45,10 @@ function App() {
               <Home addToCart={addToCart} selectedCategory={selectedCategory} />
             }
           />
+          <Route path="/add_product" element={<AddProduct />} />
           <Route path="/product" element={<Product />} />
           <Route path="product/:id" element={<Product />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/order-history" element={<OrderHistory />} />{" "}
+          <Route path="/product/update/:id" element={<UpdateProduct />} />
         </Routes>
       </BrowserRouter>
     </AppProvider>

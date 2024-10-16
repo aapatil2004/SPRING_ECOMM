@@ -99,7 +99,6 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     try {
-      // Loop through cart items to update product stock
       for (const item of cartItems) {
         const { imageUrl, imageName, imageData, imageType, quantity, ...rest } =
           item;
@@ -112,7 +111,7 @@ const Cart = () => {
         console.log("updated product data", updatedProductData);
 
         const cartProduct = new FormData();
-        cartProduct.append("imageFile", cartImage); // Assuming you have an image to upload
+        cartProduct.append("imageFile", cartImage);
         cartProduct.append(
           "product",
           new Blob([JSON.stringify(updatedProductData)], {
@@ -120,7 +119,6 @@ const Cart = () => {
           })
         );
 
-        // Update product stock
         await axios
           .put(`http://localhost:8080/api/product/${item.id}`, cartProduct, {
             headers: {
@@ -128,37 +126,12 @@ const Cart = () => {
             },
           })
           .then((response) => {
-            console.log("Product updated successfully:", response.data);
+            console.log("Product updated successfully:", cartProduct);
           })
           .catch((error) => {
             console.error("Error updating product:", error);
           });
       }
-
-      // Prepare checkout request data
-      const orderDetails = {
-        productInfo: cartItems.map((item) => ({
-          id: item.id,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-        })),
-        amount: cartItems.reduce(
-          (total, item) => total + item.price * item.quantity,
-          0
-        ),
-        currency: "USD", // or your desired currency
-        customerEmail: "customer@example.com", // replace with actual email from user
-      };
-
-      // Send checkout request
-      const response = await axios.post(
-        "http://localhost:8080/api/checkout",
-        orderDetails
-      );
-      console.log("Order placed successfully:", response.data);
-
-      // Clear cart after successful checkout
       clearCart();
       setCartItems([]);
       setShowModal(false);

@@ -1,13 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useContext, useEffect } from "react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppContext from "../Context/Context";
 import axios from "../axios";
-import UpdateProduct from "./UpdateProduct";
+
 const Product = () => {
   const { id } = useParams();
-  const { data, addToCart, removeFromCart, cart, refreshData } =
-    useContext(AppContext);
+  const { data, removeFromCart, refreshData } = useContext(AppContext);
   const [product, setProduct] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
@@ -55,10 +53,6 @@ const Product = () => {
     navigate(`/product/update/${id}`);
   };
 
-  const handlAddToCart = () => {
-    addToCart(product);
-    alert("Product added to cart");
-  };
   if (!product) {
     return (
       <h2 className="text-center" style={{ padding: "10rem" }}>
@@ -66,6 +60,7 @@ const Product = () => {
       </h2>
     );
   }
+
   return (
     <>
       <div className="containers" style={{ display: "flex" }}>
@@ -90,7 +85,6 @@ const Product = () => {
                     <i> {new Date(product.releaseDate).toLocaleDateString()}</i>
                   </span>
                 </h6>
-                {/* <i> {new Date(product.releaseDate).toLocaleDateString()}</i> */}
               </p>
             </div>
 
@@ -121,25 +115,6 @@ const Product = () => {
             <span style={{ fontSize: "2rem", fontWeight: "bold" }}>
               {"$" + product.price}
             </span>
-            <button
-              className={`cart-btn ${
-                !product.productAvailable ? "disabled-btn" : ""
-              }`}
-              onClick={handlAddToCart}
-              disabled={!product.productAvailable}
-              style={{
-                padding: "1rem 2rem",
-                fontSize: "1rem",
-                backgroundColor: "#007bff",
-                color: "white",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-                marginBottom: "1rem",
-              }}
-            >
-              {product.productAvailable ? "Add to cart" : "Out of Stock"}
-            </button>
             <h6 style={{ marginBottom: "1rem" }}>
               Stock Available :{" "}
               <i style={{ color: "green", fontWeight: "bold" }}>
@@ -167,7 +142,6 @@ const Product = () => {
             >
               Update
             </button>
-            {/* <UpdateProduct product={product} onUpdate={handleUpdate} /> */}
             <button
               className="btn btn-primary"
               type="button"

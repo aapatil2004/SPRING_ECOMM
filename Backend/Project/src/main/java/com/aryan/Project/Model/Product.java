@@ -55,4 +55,11 @@ public class Product {
     @Lob // For large objects
     private byte[] imageDate;
 
+    public void setImage(byte[] bytes) {
+        if (bytes == null || bytes.length == 0) {
+            throw new IllegalArgumentException("Image data must not be null or empty.");
+        }
+        this.imageDate = bytes;
+    }
+
 }

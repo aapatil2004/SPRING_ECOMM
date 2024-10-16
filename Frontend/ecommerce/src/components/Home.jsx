@@ -5,7 +5,7 @@ import AppContext from "../Context/Context";
 import unplugged from "../assets/unplugged.png";
 
 const Home = ({ selectedCategory }) => {
-  const { data, isError, addToCart, refreshData } = useContext(AppContext);
+  const { data, isError, refreshData } = useContext(AppContext);
   const [products, setProducts] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
 
@@ -60,6 +60,7 @@ const Home = ({ selectedCategory }) => {
       </h2>
     );
   }
+
   return (
     <>
       <div
@@ -87,12 +88,6 @@ const Home = ({ selectedCategory }) => {
           filteredProducts.map((product) => {
             const { id, brand, name, price, productAvailable, imageUrl } =
               product;
-            const cardStyle = {
-              width: "18rem",
-              height: "12rem",
-              boxShadow: "rgba(0, 0, 0, 0.24) 0px 2px 3px",
-              backgroundColor: productAvailable ? "#fff" : "#ccc",
-            };
             return (
               <div
                 className="card mb-3"
@@ -160,21 +155,11 @@ const Home = ({ selectedCategory }) => {
                           marginBottom: "5px",
                         }}
                       >
-                        <i class="bi bi-currency-rupee"></i>
+                        <i className="bi bi-currency-rupee"></i>
                         {price}
                       </h5>
                     </div>
-                    <button
-                      className="btn-hover color-9"
-                      style={{ margin: "10px 25px 0px " }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        addToCart(product);
-                      }}
-                      disabled={!productAvailable}
-                    >
-                      {productAvailable ? "Add to Cart" : "Out of Stock"}
-                    </button>
+                    {/* Remove Add to Cart button */}
                   </div>
                 </Link>
               </div>

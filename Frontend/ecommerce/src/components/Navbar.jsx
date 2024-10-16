@@ -131,13 +131,6 @@ const Navbar = ({ onSelectCategory }) => {
                     ))}
                   </ul>
                 </li>
-
-                {/* Order History Button */}
-                <li className="nav-item">
-                  <a className="nav-link" href="/order-history">
-                    Order History
-                  </a>
-                </li>
               </ul>
 
               <button className="theme-btn" onClick={() => toggleTheme()}>
@@ -147,47 +140,6 @@ const Navbar = ({ onSelectCategory }) => {
                   <i className="bi bi-sun-fill"></i>
                 )}
               </button>
-
-              <div className="d-flex align-items-center cart">
-                <a href="/cart" className="nav-link text-dark">
-                  <i
-                    className="bi bi-cart me-2"
-                    style={{ display: "flex", alignItems: "center" }}
-                  >
-                    Cart
-                  </i>
-                </a>
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  value={input}
-                  onChange={(e) => handleChange(e.target.value)}
-                  onFocus={() => setSearchFocused(true)}
-                  onBlur={() => setSearchFocused(false)}
-                />
-                {showSearchResults && (
-                  <ul className="list-group">
-                    {searchResults.length > 0
-                      ? searchResults.map((result) => (
-                          <li key={result.id} className="list-group-item">
-                            <a
-                              href={`/product/${result.id}`}
-                              className="search-result-link"
-                            >
-                              <span>{result.name}</span>
-                            </a>
-                          </li>
-                        ))
-                      : noResults && (
-                          <p className="no-results-message">
-                            No Product with such Name
-                          </p>
-                        )}
-                  </ul>
-                )}
-              </div>
             </div>
           </div>
         </nav>
