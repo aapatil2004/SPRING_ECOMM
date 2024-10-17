@@ -36,7 +36,7 @@ public class OrderController {
     // .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     // }
 
-    @GetMapping
+    @GetMapping("/orders")
     public ResponseEntity<List<Orders>> getAllOrders() {
         try {
             List<Orders> orders = service.findAll();
