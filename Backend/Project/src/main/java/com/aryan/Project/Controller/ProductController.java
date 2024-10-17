@@ -45,37 +45,37 @@ public class ProductController {
             return new ResponseEntity<>(prod, HttpStatus.NOT_FOUND);
     }
 
-    // @PostMapping("/product")
-    // public ResponseEntity<?> addProduct(@RequestPart Product product,
-    // @RequestPart MultipartFile imageFile) {
-    // try {
-    // Product product1 = service.addProduct(product, imageFile);
-    // return new ResponseEntity<>(product1, HttpStatus.CREATED);
-    // } catch (Exception e) {
-
-    // // System.out.println("Error here ");
-    // return new ResponseEntity<>(e.getMessage(),
-    // HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
-    // }
-
-    @PostMapping(value = "/product", consumes = { "multipart/form-data" })
-    public ResponseEntity<?> addProduct(
-            @RequestPart("product") String productJson,
-            @RequestPart("imageFile") MultipartFile imageFile) {
+    @PostMapping("/product")
+    public ResponseEntity<?> addProduct(@RequestPart Product product,
+            @RequestPart MultipartFile imageFile) {
         try {
-            // Convert JSON string to Product object using Jackson
-            ObjectMapper objectMapper = new ObjectMapper();
-            Product product = objectMapper.readValue(productJson, Product.class);
-
-            Product savedProduct = service.addProduct(product, imageFile);
-            return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+            Product product1 = service.addProduct(product, imageFile);
+            return new ResponseEntity<>(product1, HttpStatus.CREATED);
         } catch (Exception e) {
-            e.printStackTrace();
+
+            // System.out.println("Error here ");
             return new ResponseEntity<>(e.getMessage(),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    // @PostMapping(value = "/product", consumes = { "multipart/form-data" })
+    // public ResponseEntity<?> addProduct(
+    // @RequestPart("product") String productJson,
+    // @RequestPart("imageFile") MultipartFile imageFile) {
+    // try {
+    // // Convert JSON string to Product object using Jackson
+    // ObjectMapper objectMapper = new ObjectMapper();
+    // Product product = objectMapper.readValue(productJson, Product.class);
+
+    // Product savedProduct = service.addProduct(product, imageFile);
+    // return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // return new ResponseEntity<>(e.getMessage(),
+    // HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
+    // }
 
     @GetMapping("/product/{productId}/image")
     public ResponseEntity<byte[]> getImageByProductId(@PathVariable int productId) {
