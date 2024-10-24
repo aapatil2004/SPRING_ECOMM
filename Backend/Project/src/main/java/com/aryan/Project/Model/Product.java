@@ -3,7 +3,7 @@ package com.aryan.Project.Model;
 import java.math.BigDecimal;
 import java.sql.Date;
 
-import org.hibernate.annotations.Columns;
+// import org.hibernate.annotations.Columns;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

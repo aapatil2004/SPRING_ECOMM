@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.aryan.Project.Model.Product;
 import com.aryan.Project.Service.ProductService;
 // import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/api")

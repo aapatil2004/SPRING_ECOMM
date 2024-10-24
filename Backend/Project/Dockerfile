@@ -1,4 +1,4 @@
-FROM maven:3.8.5-openjdk-17 AS build
+FROM maven:3.8.5-openjdk-20 AS build
 WORKDIR /app
 
 # Copy Maven files from the correct paths
