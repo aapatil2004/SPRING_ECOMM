@@ -5,8 +5,10 @@ WORKDIR /app
 COPY ./pom.xml ./pom.xml
 COPY ./src ./src
 
+# Install Maven
+RUN apt-get update && apt-get install -y maven && apt-get clean
 # Build the project using Maven
-RUN mvn clean package
+RUN mvn clean package -DskipTests
 
 FROM openjdk:20-jdk-slim
 WORKDIR /app
