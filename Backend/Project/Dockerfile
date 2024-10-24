@@ -1,4 +1,4 @@
-FROM maven:3.8.5-openjdk-17 AS build
+FROM maven:3.9.4-eclipse-temurin-20 AS build
 WORKDIR /app
 
 # Copy Maven files from the correct paths
@@ -8,7 +8,7 @@ COPY ./src ./src
 # Build the project using Maven
 RUN mvn clean package -DskipTests
 
-FROM openjdk:17-jdk-slim
+FROM openjdk:20-jdk-slim
 WORKDIR /app
 
 # Copy the built JAR to the final image
