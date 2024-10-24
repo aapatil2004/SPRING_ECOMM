@@ -8,7 +8,7 @@ COPY ./src ./src
 # Build the project using Maven
 RUN mvn clean package
 
-FROM openjdk:17-jdk-slim
+FROM openjdk:20-jdk-slim
 WORKDIR /app
 
 # Copy the built JAR to the final image
