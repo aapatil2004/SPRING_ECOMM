@@ -7,9 +7,9 @@ import Product from "./components/Product";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./Context/Context";
 import UpdateProduct from "./components/UpdateProduct";
+import Login from "./components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -45,6 +45,7 @@ function App() {
               <Home addToCart={addToCart} selectedCategory={selectedCategory} />
             }
           />
+          <Route path="/login" element={<Login />} />
           <Route path="/add_product" element={<AddProduct />} />
           <Route path="/product" element={<Product />} />
           <Route path="product/:id" element={<Product />} />

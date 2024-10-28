@@ -1,7 +1,7 @@
 /* Navbar Styles */
 
 .light-theme {
-  --root_background: #1f1f1f;
+  --root_background: #212121;
   --body_background: white;
   --navbar_background: white;
   --navbar_text: black;

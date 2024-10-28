@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 const Navbar = ({ onSelectCategory }) => {
   const getInitialTheme = () => {
     const storedTheme = localStorage.getItem("theme");
@@ -14,6 +14,7 @@ const Navbar = ({ onSelectCategory }) => {
   const [noResults, setNoResults] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // New state for login status
 
   useEffect(() => {
     fetchData();
@@ -71,6 +72,15 @@ const Navbar = ({ onSelectCategory }) => {
     "Toys",
     "Fashion",
   ];
+
+  const handleLogin = async () => {
+    navigate("/login");
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Reset login state
+    navigate("/"); // Redirect to login page on logout
+  };
 
   return (
     <>
@@ -133,13 +143,34 @@ const Navbar = ({ onSelectCategory }) => {
                 </li>
               </ul>
 
-              <button className="theme-btn" onClick={() => toggleTheme()}>
-                {theme === "dark-theme" ? (
-                  <i className="bi bi-moon-fill"></i>
+              {/* Login/Logout Button */}
+              <div className="d-flex align-items-center">
+                {isLoggedIn ? (
+                  <button
+                    className="btn btn-outline-danger me-2"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
                 ) : (
-                  <i className="bi bi-sun-fill"></i>
+                  <a
+                    className="btn btn-outline-success me-2"
+                    href="/login"
+                    onClick={handleLogin}
+                  >
+                    Login
+                  </a>
                 )}
-              </button>
+
+                {/* Theme Toggle Button */}
+                <button className="theme-btn" onClick={() => toggleTheme()}>
+                  {theme === "dark-theme" ? (
+                    <i className="bi bi-moon-fill"></i>
+                  ) : (
+                    <i className="bi bi-sun-fill"></i>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </nav>
