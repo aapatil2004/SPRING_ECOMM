@@ -11,6 +11,8 @@ public class Orders {
 
     private String currency;
     private double amount;
+
+    @Column(name = "customer_email")
     private String customerEmail;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -57,9 +59,4 @@ public class Orders {
     public void setProductInfo(List<OrderItem> productInfo) {
         this.productInfo = productInfo;
     }
-
-    // public Object map(Object object) {
-    // // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method 'map'");
-    // }
 }

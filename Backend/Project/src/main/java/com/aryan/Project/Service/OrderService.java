@@ -27,6 +27,10 @@ public class OrderService {
         return repo.findAll();
     }
 
+    public List<Orders> findOrdersByCustomerEmail(String customerEmail) {
+        return repo.findByCustomerEmail(customerEmail); // Query orders by email
+    }
+
     // Delete an order by ID
     public void deleteById(Long id) {
         repo.deleteById(id);

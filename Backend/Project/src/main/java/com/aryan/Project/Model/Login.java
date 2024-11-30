@@ -9,8 +9,8 @@ import jakarta.persistence.Table;
 public class Login {
 
     @Id
-    private String username;
     private String email; // Added email field
+    private String username;
     private String password;
 
     public String getUsername() {
