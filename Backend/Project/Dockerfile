@@ -2,8 +2,8 @@ FROM maven:3.9.4-eclipse-temurin-20 AS build
 WORKDIR /app
 
 # Copy Maven files from the correct paths
-COPY ./pom.xml ./pom.xml
-COPY ./src ./src
+COPY . /pom.xml 
+COPY . /src
 
 # Build the project using Maven
 RUN mvn clean package -DskipTests
@@ -18,4 +18,4 @@ COPY --from=build /app/target/Project-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
 # Start the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar"]
