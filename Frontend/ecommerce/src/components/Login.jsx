@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./LoginForm.css";
 import SignInForm from "./Signin";
 import SignUpForm from "./Signup";
-import HomePage from "./Home";
 export default function App() {
   const [type, setType] = useState("signIn");
   const handleOnClick = (text) => {
@@ -19,8 +18,8 @@ export default function App() {
       <h2>Sign in/up Form</h2>
       <div className={containerClass} id="container">
         console.log("Till here all clear")
-        <SignUpForm />
         <SignInForm />
+        <SignUpForm />
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">

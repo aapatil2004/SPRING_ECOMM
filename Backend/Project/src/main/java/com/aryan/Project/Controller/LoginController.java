@@ -9,11 +9,23 @@ import com.aryan.Project.Service.LoginService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
 public class LoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @GetMapping("/users")
+    public ResponseEntity<Login> getUserByEmail(@RequestParam String email) {
+        Login user = loginService.findByEmail(email); // create this method in your LoginService
+        if (user != null) {
+            System.out.println(user);
+            return ResponseEntity.ok(user); // returns JSON with username, email, etc.
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 
     // Sign Up Endpoint
     @PostMapping("/SignUp") // Conventionally use lowercase for paths

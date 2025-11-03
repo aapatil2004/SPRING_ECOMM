@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 function SignInForm() {
+  const navigate = useNavigate();
+
   const [state, setState] = React.useState({
     email: "",
     password: "",
@@ -30,7 +32,7 @@ function SignInForm() {
       if (response.status === 200) {
         alert("Login successful!");
         // Optionally, clear the form or redirect user
-        navigate("/home");
+        navigate("/");
         setState({ email: "", password: "" });
       }
 

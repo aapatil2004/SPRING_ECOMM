@@ -12,6 +12,10 @@ public class LoginService {
     @Autowired
     private LoginRepository loginRepository;
 
+    public Login findByEmail(String email) {
+        return loginRepository.findByEmail(email);
+    }
+
     // Method to register a new user
     public boolean register(String username, String email, String password) {
         // Check if the user already exists
