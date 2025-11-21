@@ -8,7 +8,9 @@ import com.aryan.Project.Service.OrderService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.servlet.view.RedirectView;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -68,23 +70,31 @@ public class OrderController {
     }
 
     @PostMapping("/success")
-    public ResponseEntity<String> orderSuccess(@RequestBody Orders order) {
+    public RedirectView orderSuccess(HttpServletRequest request) {
         try {
-            // Process order success (e.g., send confirmation, update payment status)
-            return new ResponseEntity<>("Order success for Order ID: " + order.getId(), HttpStatus.OK);
+            String status = request.getParameter("status");
+            // String txnid = request.getParameter("txnid");
+            // String hash = request.getParameter("hash");
+
+            if ("success".equals(status))
+                return new RedirectView("http://localhost:5173/order/success");
+            else
+                return new RedirectView("http://localhost:5173/order/failure");
         } catch (Exception e) {
-            return new ResponseEntity<>("Order success processing failed.", HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+            return new RedirectView("http://localhost:5173/order/failure");
         }
     }
 
     // New route for failure if something goes wrong
     @PostMapping("/failure")
-    public ResponseEntity<String> orderFailure(@RequestBody Orders order) {
+    public RedirectView orderFailure(HttpServletRequest request) {
         try {
-            // Process order failure (e.g., cancel the order, update status)
-            return new ResponseEntity<>("Order failed for Order ID: " + order.getId(), HttpStatus.BAD_REQUEST);
+            String txnid = request.getParameter("txnid");
+            return new RedirectView("http://localhost:5173/order/failure");
         } catch (Exception e) {
-            return new ResponseEntity<>("Order failure processing failed.", HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+            return new RedirectView("http://localhost:5173/order/failure");
         }
     }
 }

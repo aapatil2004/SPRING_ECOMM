@@ -1,4 +1,4 @@
-FROM maven:3.9.4-eclipse-temurin-20 AS build
+FROM maven:3.9.4-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # Copy Maven files from the correct paths
@@ -8,15 +8,9 @@ COPY ./src ./src
 # Build the project using Maven
 RUN mvn clean package -DskipTests
 
-FROM openjdk:20-jdk-slim
+FROM eclipse-temurin:17-jdk-slim
 WORKDIR /app
 
-# Set MySQL environment variables
-ENV MYSQL_HOST=localhost \
-    MYSQL_PORT=3306 \
-    MYSQL_DB=project \
-    MYSQL_USER=root \
-    MYSQL_PASSWORD=Sunita@40
 # Copy the built JAR to the final image
 COPY --from=build /app/target/Project-0.0.1-SNAPSHOT.jar app.jar
 
